@@ -8,15 +8,17 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import pages.GroceryCrudPage;
 
-public class GroceryCrud {
+public class GroceryCrudSteps {
+
     GroceryCrudPage page = new GroceryCrudPage();
+
     @Given("^the user is on the grocery crud page$")
     public void theUserIsOnTheGroceryCrudPage() {
         page.openPage();
     }
 
     @When("^the user fill the fields$")
-    public void theUserFillTheFields() throws Exception{
+    public void theUserFillTheFields() {
         page.selectOption("Bootstrap V4 Theme");
         page.clickAddCustomer();
         page.fillName("Teste Sicredi");
@@ -31,18 +33,51 @@ public class GroceryCrud {
         page.fillCountry("Brasil");
         page.selectFromEmployeer("Fixter");
         page.fillCreditLimit("200");
-        Thread.sleep(5000);
-        page.validateMessageSuccess();
     }
 
     @Then("^the message is displayed$")
     public void theMessageIsDisplayed() {
         String value = page.validateMessageSuccess();
         Assert.assertThat(value, CoreMatchers.containsString("Your data has been successfully stored into the database."));
+
     }
 
     @And("^save the form$")
-    public void saveTheForm() {
-        page. clickSaveBtn();
+    public void saveTheForm() throws Exception{
+        page.clickSaveBtn();
+        Thread.sleep(5000);
+    }
+
+    @And("^the user clicks on Go back to list$")
+    public void theUserClicksOnGoBackToList() throws Exception{
+        page.clickOnBackToList();
+    }
+
+    @And("^the user search the value \"([^\"]*)\"$")
+    public void theUserSearchTheValue(String value) throws Throwable {
+        Thread.sleep(5000);
+        page.searchValue(value);
+    }
+
+    @And("^the user clicks on the checkbox$")
+    public void theUserClicksOnTheCheckbox() throws Throwable{
+        Thread.sleep(3000);
+        page.cilckOnSelectAllCheckBox();
+    }
+
+    @And("^the user clicks on delete button$")
+    public void theUserClicksOnDeleteButton() {
+        page.cilckOnDeleteButton();
+    }
+
+    @And("^the user confirm the delete option$")
+    public void theUserConfirmTheDeleteOption()  throws Exception{
+        page.confirmDeleteOption();
+    }
+
+    @Then("^the delete message will be displayed$")
+    public void theDeleteMessageWillBeDisplayed() {
+        String value = page.validateDelete();
+        Assert.assertThat(value, CoreMatchers.containsString("Your data has been successfully deleted from the database."));
     }
 }

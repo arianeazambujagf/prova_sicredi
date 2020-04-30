@@ -1,16 +1,15 @@
 package pages;
 
 import elements.GroceryCrudElements;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
-import org.junit.Test;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import setup.ConfigBrowsers;
+import setup.BaseTests;
 
 public class GroceryCrudPage extends GroceryCrudElements {
+
     public GroceryCrudPage(){
-        PageFactory.initElements(ConfigBrowsers.getDriver(), this);
+        driver = BaseTests.getDriver();
+        PageFactory.initElements(BaseTests.getDriver(), this);
     }
 
     public void openPage(){
@@ -81,31 +80,36 @@ public class GroceryCrudPage extends GroceryCrudElements {
         saveBtn.click();
     }
 
+    public void clickOnBackToList(){
+        goBackToListBtn.click();
+    }
+
     public String validateMessageSuccess(){
         String value = messageSuccess.getText();
        return value;
     }
 
-    @Test
-    public void PrimeiroTeste() throws Exception{
-        selectOption("Bootstrap V4 Theme");
-        clickAddCustomer();
-        fillName("Teste Sicredi");
-        fillLastName("Teste");
-        fillContactFirstName("Ariane");
-        fillPhone("51 9999-9999");
-        fillAddressLineOne("Av Assis Brasil, 3970");
-        fillAddressLineTwo("Torre D");
-        fillCity("Porto Alegre");
-        fillState("RS");
-        fillPostalCode("91000-000");
-        fillCountry("Brasil");
-        selectFromEmployeer("Fixter");
-        fillCreditLimit("200");
-        clickSaveBtn();
-        Thread.sleep(5000);
-        validateMessageSuccess();
+    public void searchValue(String value){
+        searchField.sendKeys(value);
     }
 
+    public void cilckOnSelectAllCheckBox(){
+        selectAllCheckBox.click();
+    }
+
+    public void cilckOnDeleteButton(){
+        deleteBtn.click();
+    }
+
+    public void confirmDeleteOption() throws Exception{
+        confirmDeleteBtn.click();
+        Thread.sleep(8000);
+    }
+
+    public String validateDelete(){
+
+        String value = messageToastDelete.getText();
+        return value;
+    }
 
 }

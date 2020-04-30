@@ -51,8 +51,27 @@ public class GroceryCrudElements extends ConfigBrowsers {
     @FindBy(id ="form-button-save")
     protected WebElement saveBtn;
 
+    @FindBy(id ="save-and-go-back-button")
+    protected WebElement goBackToListBtn;
+
     @FindBy(id ="report-success")
     protected WebElement messageSuccess;
 
+    @FindBy(xpath ="//*[contains(@name,'customerName')]")
+    protected WebElement searchField;
 
+    @FindBy(xpath ="//*[@class='select-all-none']")
+    protected WebElement selectAllCheckBox;
+
+    @FindBy(xpath ="//*[@class='btn btn-outline-dark delete-selected-button']")
+    protected WebElement deleteBtn;
+
+    @FindBy(xpath ="//*[@class='btn btn-danger delete-multiple-confirmation-button']")
+    protected WebElement confirmDeleteBtn;
+
+    @FindBy(xpath ="//*[@class='close']")
+    protected WebElement closeModal;
+
+    @FindBy(xpath ="//*[@class='alert alert-success growl-animated animated bounceInDown']")
+    protected WebElement messageToastDelete;
 }
